@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Proje_Takip.Models.ProjeTakip;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -9,6 +10,10 @@ namespace Proje_Takip.Models.Personel
 {
     public class PersonelBilgileri
     {
+        public PersonelBilgileri()
+        {
+            this.PersonelProjeleris = new HashSet<PersonelProjeleri>();
+        }
         [Key]
         public string PersonelBilgileriId { get; set; }
 
@@ -49,23 +54,32 @@ namespace Proje_Takip.Models.Personel
         public string Adres { get; set; }
 
         [DisplayName("MEDENİ HAL")]
+        [StringLength(25, ErrorMessage = "Maximum uzunluk 25 karakterden fazla olamaz")]
         public string MedeniHal { get; set; }
 
         [DisplayName("YAKIN BİLGİSİ")]
+        [StringLength(25, ErrorMessage = "Maximum uzunluk 25 karakterden fazla olamaz")]
         public string YakinBilgisi { get; set; }
 
+        [StringLength(11, ErrorMessage = "Maximum uzunluk 11 karakterden fazla olamaz")]
         [DisplayName("YAKIN TC KİMLİK NUMARASI")]
         public string YakinTc { get; set; }
+
         [DisplayName("YAKIN ADI SOYADI")]
+        [StringLength(25, ErrorMessage = "Maximum uzunluk 25 karakterden fazla olamaz")]
         public string YakinAdSoyad { get; set; }
+
         [DisplayName("YAKIN TELEFON NUMARASI")]
-        public int YakinTel { get; set; }
+        [StringLength(15, ErrorMessage = "Maximum uzunluk 15 karakterden fazla olamaz")]
+        public string YakinTel { get; set; }
+
         [DisplayName("DOĞUM TARİHİ")]
         public DateTime DogumTarihi { get; set; }
+
         [DisplayName("İŞE GİRİŞ TARİHİ")]
         public DateTime? İseGirisTarihi { get; set; }
 
-
+        public virtual ICollection<PersonelProjeleri> PersonelProjeleris { get; set; }
 
     }
 }
